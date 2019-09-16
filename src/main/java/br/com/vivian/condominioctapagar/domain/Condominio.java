@@ -1,4 +1,4 @@
-package br.com.vivian.condominioctapagar.domain;
+		 package br.com.vivian.condominioctapagar.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

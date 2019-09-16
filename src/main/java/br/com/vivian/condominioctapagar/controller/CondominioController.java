@@ -25,12 +25,12 @@ public class CondominioController {
 		this.condominioService = condominioService;
 	}
 	
-	@GetMapping(value = "/condominio")
+	@GetMapping(value = "/condominiopg")
 	public ResponseEntity<List<CondominioDTO>> obterCondominio(){
 		List<CondominioDTO> condominios = condominioService.findAll();
 		return new ResponseEntity<List<CondominioDTO>>(condominios, HttpStatus.OK);
 	}
-	@PostMapping(value = "/condominio")
+	@PostMapping(value = "/condominiopg")
 	public ResponseEntity<?>delete(@PathVariable("cnpj")String cnpj){
 		this.condominioService.deleteBycnpj(cnpj);
 		return new ResponseEntity<>(HttpStatus.OK);
