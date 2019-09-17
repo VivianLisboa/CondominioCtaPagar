@@ -12,6 +12,6 @@ import br.com.vivian.condominioctapagar.domain.CtaPagar;
 @Repository
 public interface CtaPagarRepository extends JpaRepository<CtaPagar, Integer> {
 
-	@Query("SELECT c FROM CtaPagar c WHERE c.condominio.id_condominio = :id_condominio")
-	public Optional<CtaPagar> findById(@Param("id_condominio") Integer id);
+//	@Query("SELECT c FROM CtaPagar c WHERE c.condominio.id_condominio = :id_condominio")
+//	public Optional<CtaPagar> findById(@Param("id_condominio") Integer id);
 }

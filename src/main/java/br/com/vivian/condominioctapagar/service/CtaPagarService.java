@@ -16,16 +16,16 @@ import br.com.vivian.condominioctapagar.repository.CtaPagarRepository;
 @Service
 public class CtaPagarService {
 	private CtaPagarRepository ctaPagarRepository;
-	private CondominioRepository condominioRepository;
+	private CondominioService condominioService;
 
 	@Autowired
-	public CtaPagarService(CondominioRepository condominioRepository, CtaPagarRepository ctaPagarRepository) {
+	public CtaPagarService(CondominioService condominioService, CtaPagarRepository ctaPagarRepository) {
 		this.ctaPagarRepository = ctaPagarRepository;
-		this.condominioRepository = condominioRepository;
+		this.condominioService = condominioService;
 	}
 
 	public void save(CtaPagarDTO ctaPagarDTO) {
-		Optional<Condominio> condominio = condominioRepository.findById(ctaPagarDTO.getId());
+	Condominio condominio = condominioService.findById(ctaPagarDTO.getId());
 
 		String data = ctaPagarDTO.getData();
 		String historico = ctaPagarDTO.getHistorico();
@@ -33,13 +33,13 @@ public class CtaPagarService {
 		Double credito = ctaPagarDTO.getCredito();
 		Double saldo = ctaPagarDTO.getSaldo();
 
-		CtaPagar ctaPagar = new CtaPagar(condominio.get(), data, historico, debito, credito, saldo);
+		CtaPagar ctaPagar = new CtaPagar(condominio, data, historico, debito, credito, saldo);
 		this.ctaPagarRepository.saveAndFlush(ctaPagar);
 		ctaPagarDTO.setId(ctaPagar.getId());
 	}
 
 	public void update(CtaPagarDTO ctaPagarDTO) {
-		Optional<Condominio> condominio = condominioRepository.findById(ctaPagarDTO.getId());
+	Condominio condominio = condominioService.findById(ctaPagarDTO.getId());
 
 		Integer id = ctaPagarDTO.getId();
 		String data = ctaPagarDTO.getData();
@@ -48,7 +48,7 @@ public class CtaPagarService {
 		Double credito = ctaPagarDTO.getCredito();
 		Double saldo = ctaPagarDTO.getSaldo();
 
-		CtaPagar ctaPagar = new CtaPagar(condominio.get(), data, historico, debito, credito, saldo);
+		CtaPagar ctaPagar = new CtaPagar(condominio, data, historico, debito, credito, saldo);
 		this.ctaPagarRepository.saveAndFlush(ctaPagar);
 
 	}
@@ -64,7 +64,7 @@ public class CtaPagarService {
 
 		for (CtaPagar ctaPagar : ctasPagar) {
 			CtaPagarDTO ctaPagarDTO = new CtaPagarDTO();
-			ctaPagarDTO.setCondominio(ctaPagar.getCondominio().getId());
+			ctaPagarDTO.setCondominio(condominioService.findById(ctaPagar.getCondominio().getId()));
 			ctaPagarDTO.setData(ctaPagar.getData());
 			ctaPagarDTO.setHistorico(ctaPagar.getHistorico());
 			ctaPagarDTO.setDebito(ctaPagar.getDebito());
@@ -83,7 +83,7 @@ public class CtaPagarService {
 		if (ctaPg.isPresent()) {
 			CtaPagar ctaPagar = ctaPg.get();
 			CtaPagarDTO ctaPagarDTO = new CtaPagarDTO();
-			ctaPagarDTO.setCondominio(ctaPagar.getCondominio().getId());
+			ctaPagarDTO.setCondominio(condominioService.findById(ctaPagar.getCondominio().getId()));
 			ctaPagarDTO.setData(ctaPagar.getData());
 			ctaPagarDTO.setHistorico(ctaPagar.getHistorico());
 			ctaPagarDTO.setDebito(ctaPagar.getDebito());

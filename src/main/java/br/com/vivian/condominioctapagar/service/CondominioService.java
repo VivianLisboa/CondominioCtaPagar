@@ -43,6 +43,13 @@ public class CondominioService {
 		}
 		throw new ServiceException("Condominio não encontrado");
 	}
+	public Condominio findById(Integer id) {
+		Optional<Condominio>condominioIdEnc = condominioRepository.findById(id);
+		if (condominioIdEnc.isPresent()) {
+			return condominioIdEnc.get();
+		}
+		throw new ServiceException("Id condominio não encontrado");
+	}
 	public void deleteAll() {
 		this.condominioRepository.deleteAll();
 	}
@@ -61,8 +68,11 @@ public class CondominioService {
 			condominioDTO.setNome(condominio.getNome());
 			condominioDTO.setCnpj(condominio.getCnpj());
 			condominioDTO.setContato(condominio.getContato());
+			
+			
 		}
 		return condominioRetorno;
 	}
+	
 
 }
