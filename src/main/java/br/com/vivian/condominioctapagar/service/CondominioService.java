@@ -28,7 +28,9 @@ public class CondominioService {
 		
 		Condominio condominio = new Condominio(nome,cnpj,contato);
 		validarInsertCondominio(condominio);
+		this.condominioRepository.save(condominio);
 	}
+	
 	private void validarInsertCondominio(Condominio condominio) {
 		Long numberOfCondominioWithCNPJ = condominioRepository.validateExistClientByCnpj(condominio.getCnpj());
 		if (numberOfCondominioWithCNPJ > 0) {
@@ -69,6 +71,7 @@ public class CondominioService {
 			condominioDTO.setCnpj(condominio.getCnpj());
 			condominioDTO.setContato(condominio.getContato());
 			
+			condominioRetorno.add(condominioDTO);
 			
 		}
 		return condominioRetorno;

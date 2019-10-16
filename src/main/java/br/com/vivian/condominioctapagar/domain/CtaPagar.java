@@ -10,11 +10,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+
+
 @Entity
 @Table(name = "cta_pagar")
 public class CtaPagar extends BaseDominio {
 
-	@Id
+	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cta_pagar")
 	private Integer id;
@@ -42,8 +44,17 @@ public class CtaPagar extends BaseDominio {
 	@NotNull
 	@Column(columnDefinition = "decimal")
 	private Double saldo;
+	
+	@Column
+	private String observacao;
+	@Column(name = "doc_valido")
+	private String docValido;
+	@Column(name = "comprov_pgto")
+	private String comprovPgto;
+	@Column
+	private String pendente;
 
-	private CtaPagar() {
+	public CtaPagar() {
 
 	}
 
@@ -63,6 +74,16 @@ public class CtaPagar extends BaseDominio {
 		this(condominio, data, historico, debito, credito, saldo);
 		this.id = id;
 
+	}
+
+	public CtaPagar(Integer id, Condominio condominio, String data, String historico, Double debito, Double credito,
+			Double saldo, String observacao, String docValido, String comprovPgto, String pendente) {
+
+		this(id, condominio, data, historico, debito, credito, saldo);
+		this.observacao = observacao;
+		this.docValido = docValido;
+		this.comprovPgto = comprovPgto;
+		this.pendente = pendente;
 	}
 
 	public Integer getId() {
@@ -92,5 +113,39 @@ public class CtaPagar extends BaseDominio {
 	public Double getSaldo() {
 		return saldo;
 	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+	public String getDocValido() {
+		return docValido;
+	}
+
+	public void setDocValido(String docValido) {
+		this.docValido = docValido;
+	}
+
+	public String getComprovPgto() {
+		return comprovPgto;
+	}
+
+	public void setComprovPgto(String comprovPgto) {
+		this.comprovPgto = comprovPgto;
+	}
+
+	public String getPendente() {
+		return pendente;
+	}
+
+	public void setPendente(String pendente) {
+		this.pendente = pendente;
+	}
+
+
 
 }

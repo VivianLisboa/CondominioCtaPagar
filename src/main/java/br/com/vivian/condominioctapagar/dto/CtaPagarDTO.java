@@ -1,6 +1,5 @@
 package br.com.vivian.condominioctapagar.dto;
 
-
 import javax.persistence.Id;
 
 import javax.validation.constraints.NotNull;
@@ -31,6 +30,11 @@ public class CtaPagarDTO {
 
 	@NotNull
 	private Double saldo;
+
+	private String observacao;
+	private String docValido;
+	private String comprovPgto;
+	private String pendente;
 
 	public Integer getId() {
 		return id;
@@ -87,7 +91,37 @@ public class CtaPagarDTO {
 	public void setSaldo(Double saldo) {
 		this.saldo = saldo;
 	}
-	
-	
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+	public String getDocValido() {
+		return docValido;
+	}
+
+	public void setDocValido(String docValido) {
+		this.docValido = docValido;
+	}
+
+	public String getComprovPgto() {
+		return comprovPgto;
+	}
+
+	public void setComprovPgto(String comprovPgto) {
+		this.comprovPgto = comprovPgto;
+	}
+
+	public String getPendente() {
+		return pendente;
+	}
+
+	public void setPendente(String pendente) {
+		this.pendente = pendente;
+	}
 
 }
