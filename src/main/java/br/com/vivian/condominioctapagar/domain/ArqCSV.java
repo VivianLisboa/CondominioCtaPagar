@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.opencsv.CSVReader;
+
 
 public class ArqCSV {
-
-	
 
 	public static void main(String[] args) throws IOException {
 
@@ -21,10 +21,17 @@ public class ArqCSV {
 
 		while ((record = arqCsv.readNext()) != null) {
 			CtaPagar ctaPagar = new CtaPagar();
-			ctaPagar.setObservacao(record[0]);
-			ctaPagar.setDocValido(record[1]);
-			ctaPagar.setComprovPgto(record[2]);
-			ctaPagar.setPendente(record[3]);
+			ctaPagar.setId(Integer.parseInt(record[0]));
+			
+			ctaPagar.setData(record[0]);
+			ctaPagar.setHistorico(record[1]);
+			ctaPagar.setDebito(Double.parseDouble(record[2]));
+			ctaPagar.setCredito(Double.parseDouble(record[3]));
+			ctaPagar.setSaldo(Double.parseDouble(record[4]));
+			ctaPagar.setObservacao(record[5]);
+			ctaPagar.setDocValido(record[6]);
+			ctaPagar.setComprovPgto(record[7]);
+			ctaPagar.setPendente(record[8]);
 			ctaPagar1.add(ctaPagar);
 		}
 

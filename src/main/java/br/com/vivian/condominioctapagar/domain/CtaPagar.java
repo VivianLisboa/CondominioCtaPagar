@@ -10,13 +10,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-
-
 @Entity
 @Table(name = "cta_pagar")
 public class CtaPagar extends BaseDominio {
 
-	@Id	
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cta_pagar")
 	private Integer id;
@@ -44,7 +42,7 @@ public class CtaPagar extends BaseDominio {
 	@NotNull
 	@Column(columnDefinition = "decimal")
 	private Double saldo;
-	
+
 	@Column
 	private String observacao;
 	@Column(name = "doc_valido")
@@ -90,28 +88,56 @@ public class CtaPagar extends BaseDominio {
 		return id;
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public Condominio getCondominio() {
 		return condominio;
+	}
+
+	public void setCondominio(Condominio condominio) {
+		this.condominio = condominio;
 	}
 
 	public String getData() {
 		return data;
 	}
 
+	public void setData(String data) {
+		this.data = data;
+	}
+
 	public String getHistorico() {
 		return historico;
+	}
+
+	public void setHistorico(String historico) {
+		this.historico = historico;
 	}
 
 	public Double getDebito() {
 		return debito;
 	}
 
+	public void setDebito(Double debito) {
+		this.debito = debito;
+	}
+
 	public Double getCredito() {
 		return credito;
 	}
 
+	public void setCredito(Double credito) {
+		this.credito = credito;
+	}
+
 	public Double getSaldo() {
 		return saldo;
+	}
+
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
 	}
 
 	public String getObservacao() {
@@ -146,6 +172,5 @@ public class CtaPagar extends BaseDominio {
 		this.pendente = pendente;
 	}
 
-
-
+	
 }
