@@ -25,21 +25,27 @@ public class CtaPagarService {
 	}
 
 	public void save(CtaPagarDTO ctaPagarDTO) {
-	Condominio condominio = condominioService.findById(ctaPagarDTO.getId());
+		Condominio condominio = condominioService.findById(ctaPagarDTO.getCondominio().getId());
+		
 
 		String data = ctaPagarDTO.getData();
 		String historico = ctaPagarDTO.getHistorico();
 		Double debito = ctaPagarDTO.getDebito();
 		Double credito = ctaPagarDTO.getCredito();
 		Double saldo = ctaPagarDTO.getSaldo();
+		String observacao = ctaPagarDTO.getObservacao();
+		String docValido = ctaPagarDTO.getDocValido();
+		String comprovPgto = ctaPagarDTO.getComprovPgto();
+		String pendente = ctaPagarDTO.getPendente();
+		
 
-		CtaPagar ctaPagar = new CtaPagar(condominio, data, historico, debito, credito, saldo);
+		CtaPagar ctaPagar = new CtaPagar(condominio, data, historico, debito, credito, saldo,observacao,docValido,comprovPgto,pendente);
 		this.ctaPagarRepository.saveAndFlush(ctaPagar);
 		ctaPagarDTO.setId(ctaPagar.getId());
 	}
 
 	public void update(CtaPagarDTO ctaPagarDTO) {
-	Condominio condominio = condominioService.findById(ctaPagarDTO.getId());
+		Condominio condominio = condominioService.findById(ctaPagarDTO.getId());
 
 		Integer id = ctaPagarDTO.getId();
 		String data = ctaPagarDTO.getData();
@@ -47,8 +53,13 @@ public class CtaPagarService {
 		Double debito = ctaPagarDTO.getDebito();
 		Double credito = ctaPagarDTO.getCredito();
 		Double saldo = ctaPagarDTO.getSaldo();
+		String observacao = ctaPagarDTO.getObservacao();
+		String docValido = ctaPagarDTO.getDocValido();
+		String comprovPgto = ctaPagarDTO.getComprovPgto();
+		String pendente = ctaPagarDTO.getPendente();
 
-		CtaPagar ctaPagar = new CtaPagar(condominio, data, historico, debito, credito, saldo);
+		CtaPagar ctaPagar = new CtaPagar(condominio, data, historico, debito, credito, saldo,observacao,docValido,
+				comprovPgto,pendente);
 		this.ctaPagarRepository.saveAndFlush(ctaPagar);
 
 	}
@@ -70,6 +81,10 @@ public class CtaPagarService {
 			ctaPagarDTO.setDebito(ctaPagar.getDebito());
 			ctaPagarDTO.setCredito(ctaPagar.getCredito());
 			ctaPagarDTO.setSaldo(ctaPagar.getSaldo());
+			ctaPagarDTO.setObservacao(ctaPagar.getObservacao());
+			ctaPagarDTO.setDocValido(ctaPagar.getDocValido());
+			ctaPagarDTO.setComprovPgto(ctaPagar.getComprovPgto());
+			ctaPagarDTO.setPendente(ctaPagar.getPendente());
 
 			ctaPagarRetorno.add(ctaPagarDTO);
 		}
@@ -89,6 +104,10 @@ public class CtaPagarService {
 			ctaPagarDTO.setDebito(ctaPagar.getDebito());
 			ctaPagarDTO.setCredito(ctaPagar.getCredito());
 			ctaPagarDTO.setSaldo(ctaPagar.getSaldo());
+			ctaPagarDTO.setObservacao(ctaPagar.getObservacao());
+			ctaPagarDTO.setDocValido(ctaPagar.getDocValido());
+			ctaPagarDTO.setComprovPgto(ctaPagar.getComprovPgto());
+			ctaPagarDTO.setPendente(ctaPagar.getPendente());
 			return ctaPagarDTO;
 
 		}
