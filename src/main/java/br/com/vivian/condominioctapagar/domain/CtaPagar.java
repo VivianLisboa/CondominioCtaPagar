@@ -66,16 +66,6 @@ public class CtaPagar extends BaseDominio {
 		this.saldo = saldo;
 		validarDominio();
 	}
-	public CtaPagar(Condominio condominio, String data, String historico, Double debito, Double credito,
-			Double saldo, String observacao, String docValido, String comprovPgto, String pendente) {
-
-		this(condominio, data, historico, debito, credito, saldo);
-		this.observacao = observacao;
-		this.docValido = docValido;
-		this.comprovPgto = comprovPgto;
-		this.pendente = pendente;
-		
-	}
 
 	public CtaPagar(Integer id, Condominio condominio, String data, String historico, Double debito, Double credito,
 			Double saldo) {
@@ -87,8 +77,11 @@ public class CtaPagar extends BaseDominio {
 	public CtaPagar(Integer id, Condominio condominio, String data, String historico, Double debito, Double credito,
 			Double saldo, String observacao, String docValido, String comprovPgto, String pendente) {
 
-
-		this.id = id;
+		this(id, condominio, data, historico, debito, credito, saldo);
+		this.observacao = observacao;
+		this.docValido = docValido;
+		this.comprovPgto = comprovPgto;
+		this.pendente = pendente;
 	}
 
 	public Integer getId() {
