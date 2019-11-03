@@ -1,7 +1,7 @@
 package br.com.vivian.condominioctapagar.dto;
 
 import javax.persistence.Id;
-
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import br.com.vivian.condominioctapagar.domain.Condominio;
@@ -9,6 +9,8 @@ import br.com.vivian.condominioctapagar.domain.Condominio;
 public class CtaPagarDTO {
 
 	@Id
+	@NotNull
+	@NotEmpty
 	private Integer id;
 
 	@NotNull

@@ -21,61 +21,68 @@ public class CondominioService {
 	public CondominioService(CondominioRepository condominioRepository) {
 		this.condominioRepository = condominioRepository;
 	}
+
 	public void save(CondominioDTO condominioDTO) {
 		String nome = condominioDTO.getNome();
 		String cnpj = condominioDTO.getCnpj();
 		String contato = condominioDTO.getContato();
-		
-		Condominio condominio = new Condominio(nome,cnpj,contato);
+
+		Condominio condominio = new Condominio(nome, cnpj, contato);
 		validarInsertCondominio(condominio);
-		this.condominioRepository.save(condominio);
+		this.condominioRepository.saveAndFlush(condominio);
+		condominioDTO.setId(condominio.getId());
 	}
-	
+
 	private void validarInsertCondominio(Condominio condominio) {
 		Long numberOfCondominioWithCNPJ = condominioRepository.validateExistClientByCnpj(condominio.getCnpj());
 		if (numberOfCondominioWithCNPJ > 0) {
 			throw new ServiceException("Condominio já cadastrado");
 		}
-		
+
 	}
+
 	public Condominio findByCnpj(String cnpj) {
 		Optional<Condominio> condominioEncontrado = condominioRepository.findByCnpj(cnpj);
-		if(condominioEncontrado.isPresent()) {
+		if (condominioEncontrado.isPresent()) {
 			return condominioEncontrado.get();
 		}
 		throw new ServiceException("Condominio não encontrado");
 	}
+
 	public Condominio findById(Integer id) {
-		Optional<Condominio>condominioIdEnc = condominioRepository.findById(id);
+		Optional<Condominio> condominioIdEnc = condominioRepository.findById(id);
 		if (condominioIdEnc.isPresent()) {
 			return condominioIdEnc.get();
 		}
 		throw new ServiceException("Id condominio não encontrado");
 	}
+
 	public void deleteAll() {
 		this.condominioRepository.deleteAll();
 	}
+
 	public void deleteBycnpj(String cnpj) {
 		Optional<Condominio> condominio = condominioRepository.findByCnpj(cnpj);
-		if(condominio.isPresent()) {
+		if (condominio.isPresent()) {
 			condominioRepository.deleteById(condominio.get().getId());
 		}
 	}
-	public List<CondominioDTO> findAll(){
+
+	public List<CondominioDTO> findAll() {
 		List<CondominioDTO> condominioRetorno = new ArrayList<CondominioDTO>();
 		List<Condominio> condominios = condominioRepository.findAll();
-		
-		for(Condominio condominio : condominios) {
+
+		for (Condominio condominio : condominios) {
 			CondominioDTO condominioDTO = new CondominioDTO();
+			condominioDTO.setId(condominio.getId());
 			condominioDTO.setNome(condominio.getNome());
 			condominioDTO.setCnpj(condominio.getCnpj());
 			condominioDTO.setContato(condominio.getContato());
-			
+
 			condominioRetorno.add(condominioDTO);
-			
+
 		}
 		return condominioRetorno;
 	}
-	
 
 }

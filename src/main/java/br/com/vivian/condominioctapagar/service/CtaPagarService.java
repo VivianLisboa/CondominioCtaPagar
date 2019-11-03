@@ -26,8 +26,7 @@ public class CtaPagarService {
 
 	public void save(CtaPagarDTO ctaPagarDTO) {
 		Condominio condominio = condominioService.findById(ctaPagarDTO.getCondominio().getId());
-		
-		Integer id = ctaPagarDTO.getId();
+
 		String data = ctaPagarDTO.getData();
 		String historico = ctaPagarDTO.getHistorico();
 		Double debito = ctaPagarDTO.getDebito();
@@ -37,9 +36,9 @@ public class CtaPagarService {
 		String docValido = ctaPagarDTO.getDocValido();
 		String comprovPgto = ctaPagarDTO.getComprovPgto();
 		String pendente = ctaPagarDTO.getPendente();
-		
 
-		CtaPagar ctaPagar = new CtaPagar(id,condominio, data, historico, debito, credito, saldo,observacao,docValido,comprovPgto,pendente);
+		CtaPagar ctaPagar = new CtaPagar(condominio, data, historico, debito, credito, saldo, observacao, docValido,
+				comprovPgto, pendente);
 		this.ctaPagarRepository.saveAndFlush(ctaPagar);
 		ctaPagarDTO.setId(ctaPagar.getId());
 	}
@@ -58,8 +57,8 @@ public class CtaPagarService {
 		String comprovPgto = ctaPagarDTO.getComprovPgto();
 		String pendente = ctaPagarDTO.getPendente();
 
-		CtaPagar ctaPagar = new CtaPagar(id,condominio, data, historico, debito, credito, saldo,observacao,docValido,
-				comprovPgto,pendente);
+		CtaPagar ctaPagar = new CtaPagar(id, condominio, data, historico, debito, credito, saldo, observacao, docValido,
+				comprovPgto, pendente);
 		this.ctaPagarRepository.saveAndFlush(ctaPagar);
 
 	}
@@ -76,7 +75,7 @@ public class CtaPagarService {
 		for (CtaPagar ctaPagar : ctasPagar) {
 			CtaPagarDTO ctaPagarDTO = new CtaPagarDTO();
 			ctaPagarDTO.setCondominio(condominioService.findById(ctaPagar.getCondominio().getId()));
-			Integer id = ctaPagarDTO.getId();
+			ctaPagarDTO.setId(ctaPagar.getId());
 			ctaPagarDTO.setData(ctaPagar.getData());
 			ctaPagarDTO.setHistorico(ctaPagar.getHistorico());
 			ctaPagarDTO.setDebito(ctaPagar.getDebito());
@@ -100,7 +99,7 @@ public class CtaPagarService {
 			CtaPagar ctaPagar = ctaPg.get();
 			CtaPagarDTO ctaPagarDTO = new CtaPagarDTO();
 			ctaPagarDTO.setCondominio(condominioService.findById(ctaPagar.getCondominio().getId()));
-			
+			ctaPagarDTO.setId(ctaPagar.getId());
 			ctaPagarDTO.setData(ctaPagar.getData());
 			ctaPagarDTO.setHistorico(ctaPagar.getHistorico());
 			ctaPagarDTO.setDebito(ctaPagar.getDebito());

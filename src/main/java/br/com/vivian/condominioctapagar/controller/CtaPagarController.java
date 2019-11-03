@@ -37,6 +37,7 @@ public class CtaPagarController {
 	public ResponseEntity<?>salvar(@RequestBody @Valid CtaPagarDTO ctaPagarDTO){
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	
 	@PutMapping(value = "/cta_pagar/{id}")
 	public ResponseEntity<?>update(@RequestBody CtaPagarDTO ctaPagarDTO){
 		this.ctaPagarService.update(ctaPagarDTO);
