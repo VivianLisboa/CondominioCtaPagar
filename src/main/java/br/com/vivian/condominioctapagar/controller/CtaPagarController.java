@@ -35,6 +35,7 @@ public class CtaPagarController {
 	}
 	@PostMapping(value = "/cta_pagar")
 	public ResponseEntity<?>salvar(@RequestBody @Valid CtaPagarDTO ctaPagarDTO){
+		this.ctaPagarService.save(ctaPagarDTO);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	

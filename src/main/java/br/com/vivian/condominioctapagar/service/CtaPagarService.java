@@ -7,10 +7,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import br.com.vivian.condominioctapagar.domain.Condominio;
 import br.com.vivian.condominioctapagar.domain.CtaPagar;
 import br.com.vivian.condominioctapagar.dto.CtaPagarDTO;
-import br.com.vivian.condominioctapagar.repository.CondominioRepository;
+
 import br.com.vivian.condominioctapagar.repository.CtaPagarRepository;
 
 @Service
@@ -66,6 +67,13 @@ public class CtaPagarService {
 	public void deletAll() {
 		this.ctaPagarRepository.deleteAll();
 
+	}
+
+	public void deleteById(Integer id) {
+		Optional<CtaPagar> ctaPagar = ctaPagarRepository.findById(id);
+		if (ctaPagar.isPresent()) {
+			ctaPagarRepository.deleteById(ctaPagar.get().getId());
+		}
 	}
 
 	public List<CtaPagarDTO> findAll() {

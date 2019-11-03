@@ -9,8 +9,7 @@ import br.com.vivian.condominioctapagar.domain.Condominio;
 public class CtaPagarDTO {
 
 	@Id
-	@NotNull
-	@NotEmpty
+	
 	private Integer id;
 
 	@NotNull

@@ -7,8 +7,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 public class CondominioDTO {
-	@NotNull
-	@NotEmpty
+
 	@Id
 	private Integer id;
 
