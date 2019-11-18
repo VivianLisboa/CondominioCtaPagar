@@ -1,12 +1,18 @@
 package br.com.vivian.condominioctapagar.service;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.Id;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.opencsv.CSVReader;
 
 import br.com.vivian.condominioctapagar.domain.Condominio;
 import br.com.vivian.condominioctapagar.domain.CtaPagar;
@@ -70,10 +76,8 @@ public class CtaPagarService {
 	}
 
 	public void deleteById(Integer id) {
-		Optional<CtaPagar> ctaPagar = ctaPagarRepository.findById(id);
-		if (ctaPagar.isPresent()) {
-			ctaPagarRepository.deleteById(ctaPagar.get().getId());
-		}
+
+		this.ctaPagarRepository.deleteById(id);
 	}
 
 	public List<CtaPagarDTO> findAll() {
@@ -122,4 +126,76 @@ public class CtaPagarService {
 		}
 		return null;
 	}
+
+	public void importacao(String body) {
+
+		CSVReader reader = new CSVReader(new StringReader(body), ';');
+		// CSVReader arqCsv = new CSVReader(new FileReader("ExtratoCC.csv"), ';');
+
+		List<CtaPagar> ctaPagar1 = new ArrayList<CtaPagar>();
+
+		// read line by line
+		String[] record = null;
+		
+
+		try {
+			while ((record = reader.readNext()) != null) {
+				CtaPagar ctaPagar = new CtaPagar();
+				// ctaPagar.setId(Integer.parseInt(record[0]));
+				
+				String debito = record[2];
+				String credito = record[3];
+				String saldo = record[4];
+				
+				
+								
+				debito = debito.replaceAll(".", "");// Remove ponto
+				debito = debito.replaceAll(",", ".");// troca vírgula pelo ponto formato americano
+				
+				
+				credito = credito.replaceAll(".", "");// Remove ponto
+				credito = credito.replaceAll(",", ".");// troca vírgula pelo ponto formato americano
+				
+				
+				saldo = saldo.replaceAll(".", "");// Remove ponto
+				saldo = saldo.replaceAll(",", ".");// troca vírgula pelo ponto formato americano
+				
+				if( debito.isEmpty()){
+					debito = "0";
+					}
+				if(credito.isEmpty()) {
+					credito = "0";
+				}
+				if(saldo.isEmpty()) {
+					saldo = "0";
+				}
+				
+				
+				ctaPagar.setData(record[0]);
+				ctaPagar.setHistorico(record[1]);
+				ctaPagar.setDebito(Double.parseDouble(debito));
+				ctaPagar.setCredito(Double.parseDouble(credito));
+				ctaPagar.setSaldo(Double.parseDouble(saldo));
+				ctaPagar.setObservacao(record[5]);
+				ctaPagar.setDocValido(record[6]);
+				ctaPagar.setComprovPgto(record[7]);
+				ctaPagar.setPendente(record[8]);
+
+				// adicionar salvar banco
+
+				this.ctaPagarRepository.saveAndFlush(ctaPagar);
+				ctaPagar1.add(ctaPagar);
+			}
+		} catch (NumberFormatException e) {
+
+			e.printStackTrace();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
+		System.out.println(ctaPagar1);
+
+	}
+
 }

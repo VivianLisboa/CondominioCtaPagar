@@ -11,6 +11,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 
+import br.com.vivian.condominioctapagar.controller.CondominioController;
+
 
 @Entity
 @Table(name = "condominio")
@@ -86,6 +88,6 @@ public class Condominio extends BaseDominio {
 			return false;
 		return true;
 	}
-	
+
 	
 }

@@ -24,6 +24,7 @@ public class CtaPagarDTO {
 	private String historico;
 
 	@NotNull
+	
 	private Double debito;
 
 	@NotNull

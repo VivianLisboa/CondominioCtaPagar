@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.vivian.condominioctapagar.domain.Condominio;
 import br.com.vivian.condominioctapagar.dto.CondominioDTO;
 import br.com.vivian.condominioctapagar.service.CondominioService;
 
 @RestController
 @RequestMapping(value = "vivi")
+
 public class CondominioController {
 
 	public CondominioService condominioService;

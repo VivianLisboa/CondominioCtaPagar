@@ -11,7 +11,7 @@ import com.opencsv.CSVReader;
 public class ArqCSV {
 
 	public static void main(String[] args) throws IOException {
-
+//CSVReader reader = new CSVReader(new StringReader("one,two,three"));
 		CSVReader arqCsv = new CSVReader(new FileReader("ExtratoCC.csv"), ';');
 
 		List<CtaPagar> ctaPagar1 = new ArrayList<CtaPagar>();

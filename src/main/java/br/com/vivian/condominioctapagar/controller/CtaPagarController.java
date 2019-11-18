@@ -1,4 +1,4 @@
-package br.com.vivian.condominioctapagar.controller;
+ package br.com.vivian.condominioctapagar.controller;
 
 import java.util.List;
 
@@ -46,8 +46,14 @@ public class CtaPagarController {
 	}
 	@DeleteMapping(value = "/cta_pagar/{id}")
 	public ResponseEntity<?>delete(@PathVariable("id")Integer id){
-		this.ctaPagarService.findById(id);
+		this.ctaPagarService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	@PostMapping(value = "/importacao")
+	public ResponseEntity<?>importacao(@RequestBody String body){
+		this.ctaPagarService.importacao(body);
+		return new ResponseEntity<String>(body,HttpStatus.OK);
+	}
+
 
 }
